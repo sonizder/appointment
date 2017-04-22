@@ -17,7 +17,7 @@ public class HomeController {
     public ModelAndView home(){
         ModelAndView mav = new ModelAndView("home");
         User user = new User();
-        mav.addObject("login", user);
+        mav.addObject("loginForm", user);
         return mav;
     }
 }

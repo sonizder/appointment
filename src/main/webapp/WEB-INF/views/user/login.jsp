@@ -2,26 +2,46 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<head>
+
+    <link rel="stylesheet" href='<c:url value="/static/css/bootstrap.min.css" />' />
+    <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
+    <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
+</head>
 
 <html>
 <body>
 
-    <form:form action="/appointment/login" commandName="loginForm" method="post">
-        <table>
-            <tr>
-                <td>First Name : </td>
-                <td><form:input path="name"/></td>
-            </tr>
-            <tr>
-                <td>Last Name : </td>
-                <td><form:input path="lastName"/></td>
-            <tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="login"/></td>
-            </tr>
+<div class="container">
+    <div class="col-sm-6 col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Üye Ol</h3>
+            </div>
 
-        </table>
-    </form:form>
+
+            <div class="panel-body">
+                <form:form action="/appointment/giris" commandName="loginForm" method="post">
+
+                    <div class="form-group has-feedback">
+                        <form:input path="name" type="text" class="form-control" placeholder="Email" />
+                        <i class="glyphicon glyphicon-user form-control-feedback"></i>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <form:input path="lastName" type="text" class="form-control" placeholder="Şifre" />
+                        <i class="glyphicon glyphicon-lock form-control-feedback"></i>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block">Üye Ol</button>
+                </form:form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 </body>
 </html>
