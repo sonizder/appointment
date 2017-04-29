@@ -1,6 +1,8 @@
 package com.controller;
 
+import com.component.AuthenticationHelper;
 import com.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,11 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/home")
 public class HomeController {
 
+    @Autowired
+    private AuthenticationHelper authenticationHelper;
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView home(){
         ModelAndView mav = new ModelAndView("home");
-        User user = new User();
-        mav.addObject("loginForm", user);
+        mav.addObject("isLogin", authenticationHelper.isUserLogin());
         return mav;
     }
 }

@@ -5,4 +5,5 @@ CREATE TABLE USERS(
 	EMAIL varchar(255) NOT NULL,
 	PASSWORD varchar(255) NOT NULL,
 	JOB varchar(255),
+	ROLE varchar(255) NOT NULL,
 	primary key (ID));

@@ -19,10 +19,11 @@ public class UserService implements IUserService {
 
     public User authenticateUser(User user) {
 
-        user.setPassword(String.valueOf(user.getName().hashCode()));
-        user.setEmail(user.getName()+user.getLastName());
-        user.setJob(user.getLastName()+user.getName());
-        saveUser(user);
+        user.setPassword(String.valueOf(user.getEmail().hashCode()));
+        user.setEmail(user.getEmail()+user.getEmail());
+        user.setJob(user.getEmail()+user.getPassword());
+        user.setRole("dede");
+//        saveUser(user);
         return user;
     }
 

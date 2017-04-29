@@ -22,10 +22,6 @@
 				<prop key="hibernate.current_session_context_class">thread</prop>
 			</props>
 		</property>
-		<!-- Another way of indicating that we want to update the schema; Spring
-			calls this _after_ the session factory is created, while the hbm2ddl flag
-			above is processed by Hibernate _during_ creationo f the session factory.
-			<property name="schemaUpdate" value="true" /> -->
 	</bean>
 
 

@@ -14,8 +14,10 @@
     <import resource="hibernate-context.xml"/>
 
     <bean class="com.controller.HomeController"/>
-    <bean class="com.controller.UserController"/>
+    <bean class="com.controller.user.UserController"/>
     <bean class="com.service.UserService"/>
+    <bean class="com.component.AuthenticationHelper"/>
+    <bean id="authenticationService" class="com.service.AuthenticationService"/>
     <bean class="com.dao.BaseDao">
         <!--<property name="sessionFactory" ref="sessionFactory"></property>-->
     </bean>

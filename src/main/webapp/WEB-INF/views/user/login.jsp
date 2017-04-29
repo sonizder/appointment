@@ -23,14 +23,14 @@
 
 
             <div class="panel-body">
-                <form:form action="/appointment/giris" commandName="loginForm" method="post">
+                <form:form action="/appointment/user/login" commandName="loginForm" method="post">
 
                     <div class="form-group has-feedback">
-                        <form:input path="name" type="text" class="form-control" placeholder="Email" />
+                        <form:input path="email" type="text" id="username" name="email" class="form-control" placeholder="Email" />
                         <i class="glyphicon glyphicon-user form-control-feedback"></i>
                     </div>
                     <div class="form-group has-feedback">
-                        <form:input path="lastName" type="text" class="form-control" placeholder="Şifre" />
+                        <form:input path="password" type="text" id="password" name="password" class="form-control" placeholder="Şifre" />
                         <i class="glyphicon glyphicon-lock form-control-feedback"></i>
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary btn-block">Üye Ol</button>

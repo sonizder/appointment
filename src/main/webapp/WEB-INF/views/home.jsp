@@ -26,27 +26,18 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="/appointment/giris">Giriş</a></li>
-                <li><a href="/appointment/kayit">Üye ol</a></li>
+                <li class="active"><a href="/appointment/">Home</a></li>
+                <c:if test="${isLogin == false}">
+                    <li><a href="/appointment/user/login">Giriş</a></li>
+                </c:if>
+                <c:if test="${isLogin == true}">
+                    <li><a href="/appointment/user/logout">Çıkış</a></li>
+                </c:if>
             </ul>
-
-            <form:form action="/appointment/login" commandName="loginForm" method="post" class="navbar-form navbar-right">
-                <div class="form-group">
-                    <form:input path="name" type="text" placeholder="Email" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <form:input path="lastName" type="text" placeholder="Password" class="form-control"/>
-                </div>
-                <button type="submit" class="btn btn-success" value="login">Sign in</button>
-
-            </form:form>
-
         </div>
     </div>
 </div>
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
         <h1>Hello, world!</h1>
@@ -56,7 +47,6 @@
 </div>
 
 <div class="container">
-    <!-- Example row of columns -->
     <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-2">

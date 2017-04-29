@@ -11,12 +11,11 @@
 
     <properties>
         <spring.version>4.3.7.RELEASE</spring.version>
+        <spring.security.version>4.2.2.RELEASE</spring.security.version>
         <packaging.type>war</packaging.type>
         <javax.servlet>3.0.1</javax.servlet>
         <java.version>1.8</java.version>
         <hibernate.version>5.0.0.Final</hibernate.version>
-        <!--<hibernate.version>5.2.8.Final</hibernate.version>-->
-        <!--<hibernate.version>4.3.5.Final</hibernate.version>-->
         <hsqldb.version>2.3.4</hsqldb.version>
         <junit.version>4.10</junit.version>
     </properties>
@@ -44,6 +43,17 @@
             <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
         <!--***********-->
 
         <!-- DATABASE -->

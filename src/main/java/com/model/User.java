@@ -39,6 +39,9 @@ public class User implements Serializable, IModel{
     @Column(name = "JOB")
     private String job;
 
+    @Column(name = "ROLE")
+    private String role;
+
 
     public String getName() {
         return name;
@@ -86,5 +89,13 @@ public class User implements Serializable, IModel{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
