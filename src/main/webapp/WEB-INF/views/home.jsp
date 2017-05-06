@@ -7,8 +7,82 @@
 <head>
 
     <link rel="stylesheet" href='<c:url value="/static/css/bootstrap.min.css" />' />
+    <link rel="stylesheet" href='<c:url value="/static/css/select2-bootstrap.css" />' />
     <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
     <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
+    <script language="JavaScript">
+
+        function getTown() {
+
+            var selectedCity = $("#city").val();
+
+            $.ajax({
+                type : "GET",
+                contentType : "application/json",
+                url: 'address/town',
+                data: ({city : selectedCity}),
+                dataType : 'json',
+                timeout : 100000,
+                success : function(town) {
+                    $('#time').html(town);
+//                    $('#townList').empty();
+//                    $('#town').empty();
+                    updateAddressData("#townList", town)
+                    console.log("SUCCESS: ", town);
+                },
+                error : function(e) {
+                    console.log("ERROR: ", e);
+                },
+                done : function(e) {
+                    console.log("DONE");
+                }
+            });
+
+        }
+
+        function getDistrict() {
+
+            var selectedTown = $("#town").val();
+
+            $.ajax({
+                type : "GET",
+                contentType : "application/json",
+                url: 'address/district',
+                data: ({town : selectedTown}),
+                dataType : 'json',
+                timeout : 100000,
+                success : function(district) {
+                    $('#time').html(district);
+                    updateAddressData("#districtList", district)
+                    console.log("SUCCESS: ", district);
+                },
+                error : function(e) {
+                    alert("ERROR: " +  e);
+                }
+            });
+
+        }
+
+        function updateAddressData(id, data){
+            clearAddressValues(id);
+            $.each(data, function(i, value) {
+                $(id).append($('<option>').text(value).attr('value', value));
+            });
+        }
+
+        function clearAddressValues(id) {
+            if(id == "#townList"){
+                $('#townList').empty();
+                $('#town').val('');
+                $('#districtList').empty();
+                $('#district').val('');
+            }else if(id == "#districtList"){
+                $('#districtList').empty();
+                $('#district').val('');
+            }
+        }
+
+    </script>
 </head>
 
 <html>
@@ -82,24 +156,78 @@
         <div class="col-lg-1"></div>
     </div>
 
+    <p/>
+
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
-          </span>
-                </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
+            <div class="panel-body">
+                <form:form action="/appointment/user/login" commandName="cities" method="post">
+
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            <div class="form-group">
+
+                                <input id="city" list="cityList" class="form-control" placeholder="Şehir" onchange="getTown()" />
+                                <datalist id="cityList">
+                                    <c:forEach var="city" items="${cityList}">
+                                        <option value="${city}"/>
+                                    </c:forEach>
+                                </datalist>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            <div class="form-group">
+
+                                <input id="town" list="townList" class="form-control" placeholder="İlçe" onchange="getDistrict()" />
+                                <datalist id="townList">
+                                    <c:forEach var="town" items="${townList}">
+                                        <option value="${town}"/>
+                                    </c:forEach>
+                                </datalist>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            <div class="form-group">
+
+                                <input id="district" list="districtList" class="form-control" placeholder="Semt Yada Mahalle" />
+                                <datalist id="districtList">
+                                    <c:forEach var="district" items="${districtList}">
+                                        <option value="${district}"/>
+                                    </c:forEach>
+                                </datalist>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Magaza Ara">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Ara</button>
+                            </span>
+                        </div>
+                    </div>
+                </form:form>
+            </div>
         </div>
     </div>
 
+    <p>
+
+    <div id="time">
+    </div>
     <hr>
     <footer>
-        <p>© Company 2013</p>
+        <p>© Company 2017</p>
     </footer>
-</div> <!-- /container -->
+</div>
 
 </body>
 </html>

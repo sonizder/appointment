@@ -12,9 +12,9 @@
 </head>
 <html>
 <body>
-<table>
    admin page
    <a href="<c:url value="/user/logout" />">Logout</a>
-   </table>
+
+   <c:import url="/template/footer"></c:import>
 </body>
 </html>

@@ -13,9 +13,7 @@
 
 
     <mvc:annotation-driven/>
-
     <mvc:resources mapping="/static/**" location="/static/" />
-
     <mvc:interceptors>
         <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
             <property name="cacheSeconds" value="0"/>
@@ -25,6 +23,7 @@
         </bean>
     </mvc:interceptors>
 
+    <context:annotation-config/>
     <context:component-scan base-package="com.controller, com.service, com.dao" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -32,4 +31,6 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+
+    <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
 </beans>

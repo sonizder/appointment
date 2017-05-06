@@ -12,19 +12,24 @@
 </head>
 <html>
 <body>
-<table>
-
    <div class="container">
-      <div class="page-header">
-         <h1>Maalesef bu sayfaya erişim yetkiniz yok!.</h1>
+      <div class="row">
+         <div class="col-lg-6">
+            <img src="<c:url value='/static/images/404.png'/>"/>
+         </div>
+         <div class="col-lg-6">
+            <div class="page-header">
+               <h1>Maalesef bu sayfaya erişim yetkiniz yok!.</h1>
+            </div>
+            <p>İstersen <a href="<c:url value="/home" />">Anasayfa</a> 'ya dönebilirsin.</p>
+         </div>
       </div>
-      <p>İstersen <a href="<c:url value="/home" />">Anasayfa</a> 'ya dönebilirsin.</p>
    </div>
    <div id="push"></div>
 
 
    <div id="footer" class="container">
-      <nav class="navbar navbar-default navbar-fixed-bottom">
+      <nav class="navbar navbar-default navbar-fixed-bottom footerBackgroundColor">
          <div class="navbar-inner navbar-content-center">
             <p class="text-muted credit">ordan burdan birşeyler</p>
          </div>
