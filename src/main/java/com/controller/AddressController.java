@@ -2,10 +2,11 @@ package com.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.model.Views;
+import com.service.AddressService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,23 +17,18 @@ import java.util.List;
 @RequestMapping("/address")
 public class AddressController {
 
+    @Autowired
+    private AddressService addressService;
+
     @JsonView(Views.Public.class)
     @RequestMapping(value = "/town", method = RequestMethod.GET)
     public @ResponseBody List<String> getTown(@RequestParam(value = "city") String city){
-        List<String> townList = new ArrayList<>();
-        townList.add("test");
-        townList.add("test2");
-        townList.add("test3");
-        return townList;
+        return addressService.getTown(city);
     }
 
     @JsonView(Views.Public.class)
     @RequestMapping(value = "/district", method = RequestMethod.GET)
-    public @ResponseBody List<String> getDistrict(@RequestParam(value = "town") String town){
-        List<String> districtList = new ArrayList<>();
-        districtList.add("test3");
-        districtList.add("test4");
-        districtList.add("test5");
-        return districtList;
+    public @ResponseBody List<String> getDistrict(@RequestParam(value = "city") String city, @RequestParam(value = "town") String town){
+        return addressService.getDistrict(city, town);
     }
 }

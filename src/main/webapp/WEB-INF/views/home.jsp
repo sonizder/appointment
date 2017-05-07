@@ -6,83 +6,15 @@
 
 <head>
 
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
     <link rel="stylesheet" href='<c:url value="/static/css/bootstrap.min.css" />' />
     <link rel="stylesheet" href='<c:url value="/static/css/select2-bootstrap.css" />' />
     <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
     <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
-    <script language="JavaScript">
+    <script src="<c:url value="/static/js/address.js" />"></script>
 
-        function getTown() {
-
-            var selectedCity = $("#city").val();
-
-            $.ajax({
-                type : "GET",
-                contentType : "application/json",
-                url: 'address/town',
-                data: ({city : selectedCity}),
-                dataType : 'json',
-                timeout : 100000,
-                success : function(town) {
-                    $('#time').html(town);
-//                    $('#townList').empty();
-//                    $('#town').empty();
-                    updateAddressData("#townList", town)
-                    console.log("SUCCESS: ", town);
-                },
-                error : function(e) {
-                    console.log("ERROR: ", e);
-                },
-                done : function(e) {
-                    console.log("DONE");
-                }
-            });
-
-        }
-
-        function getDistrict() {
-
-            var selectedTown = $("#town").val();
-
-            $.ajax({
-                type : "GET",
-                contentType : "application/json",
-                url: 'address/district',
-                data: ({town : selectedTown}),
-                dataType : 'json',
-                timeout : 100000,
-                success : function(district) {
-                    $('#time').html(district);
-                    updateAddressData("#districtList", district)
-                    console.log("SUCCESS: ", district);
-                },
-                error : function(e) {
-                    alert("ERROR: " +  e);
-                }
-            });
-
-        }
-
-        function updateAddressData(id, data){
-            clearAddressValues(id);
-            $.each(data, function(i, value) {
-                $(id).append($('<option>').text(value).attr('value', value));
-            });
-        }
-
-        function clearAddressValues(id) {
-            if(id == "#townList"){
-                $('#townList').empty();
-                $('#town').val('');
-                $('#districtList').empty();
-                $('#district').val('');
-            }else if(id == "#districtList"){
-                $('#districtList').empty();
-                $('#district').val('');
-            }
-        }
-
-    </script>
 </head>
 
 <html>

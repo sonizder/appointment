@@ -2,6 +2,7 @@ package com.controller;
 
 import com.component.AuthenticationHelper;
 import com.model.User;
+import com.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,23 +23,14 @@ public class HomeController {
     @Autowired
     private AuthenticationHelper authenticationHelper;
 
+    @Autowired
+    private AddressService addressService;
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView home(){
         ModelAndView mav = new ModelAndView("home");
         mav.addObject("isLogin", authenticationHelper.isUserLogin());
-        List<String> cityList =  new ArrayList<>();
-        cityList.add("İstanbul");
-        cityList.add("Ankara");
-        cityList.add("Samsun");
-
-        mav.addObject("cityList", cityList);
-
-        List<String> townList =  new ArrayList<>();
-        townList.add("Kadıköy");
-        townList.add("Beşiktaş");
-        townList.add("Taksim");
-
-        mav.addObject("townList", townList);
+        mav.addObject("cityList", addressService.getCity());
         return mav;
     }
 

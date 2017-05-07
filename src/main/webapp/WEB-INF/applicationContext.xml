@@ -10,6 +10,7 @@
     <bean class="com.controller.HomeController"/>
     <bean class="com.controller.user.UserController"/>
     <bean class="com.service.UserService"/>
+    <bean class="com.service.AddressService"/>
     <bean class="com.component.AuthenticationHelper"/>
     <bean class="com.service.AuthenticationService" id="authenticationService" />
     <bean class="com.dao.BaseDao"/>
