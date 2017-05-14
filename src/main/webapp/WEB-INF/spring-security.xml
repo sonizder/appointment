@@ -30,8 +30,7 @@
 
         <logout invalidate-session="true" logout-url="user/logout" logout-success-url="/user/home"/>
         <access-denied-handler error-page="/user/denied"/>
-        <!--<csrf/>-->
-        <csrf disabled="true"/>
+        <csrf/>
     </http>
 
     <authentication-manager>

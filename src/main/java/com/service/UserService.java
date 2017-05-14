@@ -29,7 +29,7 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> getAllUsers() {
-        return (List<User>)baseDao.getAll();
+        return (List<User>)baseDao.getAll(User.class);
     }
 
     @Override

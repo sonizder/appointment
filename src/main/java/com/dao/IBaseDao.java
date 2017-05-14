@@ -10,13 +10,13 @@ import java.util.Map;
 /**
  * Created by soner.ustel on 08/04/2017.
  */
-public interface IBaseDao {
+public interface IBaseDao<T extends IModel> {
 
-    void save(IModel model);
+    void save(T model);
 
-    List<? extends IModel> getAll();
+    List<T> getAll(Class<T> clazz);
 
-    IModel getUniqueValue(String queryName, String paramName, String paramValue);
+    T getUniqueValue(String queryName, String paramName, String paramValue);
 
-    List getList(String namedQuery, Map<String, String> params);
+    List<T> getList(String namedQuery, Map<String, String> params);
 }

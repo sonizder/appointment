@@ -11,10 +11,11 @@
 
     <link rel="stylesheet" href='<c:url value="/static/css/bootstrap.min.css" />' />
     <link rel="stylesheet" href='<c:url value="/static/css/select2-bootstrap.css" />' />
-    <script src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
-    <script src="<c:url value="/static/js/bootstrap.min.js" />"></script>
-    <script src="<c:url value="/static/js/address.js" />"></script>
-
+    <link rel="stylesheet" href='<c:url value="/static/css/custom.css" />' />
+    <script language="JavaScript" type="text/javascript" src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
+    <script language="JavaScript" type="text/javascript" src="<c:url value="/static/js/bootstrap.min.js" />"></script>
+    <script language="JavaScript" type="text/javascript" src="<c:url value="/static/js/address.js" />"></script>
+    <script language="JavaScript" type="text/javascript" src="<c:url value="/static/js/custom.js" />"></script>
 </head>
 
 <html>
@@ -58,7 +59,9 @@
         <div class="col-lg-2">
             <div class="container">
                 <h3>Sağlık</h3>
-                <img src="<c:url value='/static/images/health.png'/>" class="img-thumbnail" alt="Cinque Terre" width="180" height="180"/>
+                <a href="#" class="scrollToSearch">
+                    <img src="<c:url value='/static/images/health.png'/>" class="img-thumbnail" alt="Cinque Terre" width="180" height="180"/>
+                </a>
             </div>
         </div>
         <div class="col-lg-2">
@@ -90,11 +93,11 @@
 
     <p/>
 
-    <div class="container">
+    <div id="searchPanel" class="container">
         <div class="row">
             <div class="panel-body">
                 <form:form action="/appointment/user/login" commandName="cities" method="post">
-
+                    <div class="col-lg-1"></div>
                     <div class="col-lg-2">
                         <div class="input-group">
                             <div class="form-group">
@@ -138,23 +141,62 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Magaza Ara">
+                            <input id="sector" list="sectorList" class="form-control" placeholder="Mağaza Ara" />
+                            <datalist id="sectorList">
+                                <c:forEach var="sector" items="${sectorList}">
+                                    <option value="${sector.name}"/>
+                                </c:forEach>
+                            </datalist>
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">Ara</button>
                             </span>
                         </div>
                     </div>
+                    <div class="col-lg-1"></div>
                 </form:form>
             </div>
         </div>
     </div>
 
-    <p>
-
-    <div id="time">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>Row</th>
+                                <th>First Name</th>
+                                <th>Sektör</th>
+                                <th>Adres</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <datalist id="appointmentList">
+                                    <c:forEach var="appointment" items="${appointmentList}">
+                                        <tr>
+                                            <%--<td>${appointment.id}</td>--%>
+                                            <td class="vert-align"><img src="<c:url value='${appointment.imagePath}'/>" class="img-thumbnail" alt="Cinque Terre" width="70" height="70"/></td>
+                                            <td class="vert-align">${appointment.name}</td>
+                                            <td class="vert-align">${appointment.sector}</td>
+                                            <td class="vert-align">${appointment.city}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </datalist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
     </div>
+
+    <p>
     <hr>
     <footer>
         <p>© Company 2017</p>

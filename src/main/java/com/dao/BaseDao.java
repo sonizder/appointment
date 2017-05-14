@@ -14,13 +14,13 @@ import java.util.Map;
  * Created by soner.ustel on 08/04/2017.
  */
 @Repository
-public class BaseDao<T extends IModel> implements IBaseDao {
+public class BaseDao<T extends IModel> implements IBaseDao<T> {
 
     @Autowired
     SessionFactory sessionFactory;
 
     @Transactional
-    public void save(IModel model){
+    public void save(T model){
         Session session = getCurrentSession();
         Transaction transaction = session.beginTransaction();
         session.save(model);
@@ -28,27 +28,28 @@ public class BaseDao<T extends IModel> implements IBaseDao {
     }
 
     @Transactional
-    public List<IModel> getAll(){
+    public List<T> getAll(Class<T> clazz){
         Session session = getCurrentSession();
         session.beginTransaction();
-        return session.createCriteria(IModel.class).list();
+        return session.createCriteria(clazz).list();
     }
 
     @Transactional
-    public IModel getUniqueValue(String queryName, String paramName, String paramValue){
+    public T getUniqueValue(String queryName, String paramName, String paramValue){
         Session session = getCurrentSession();
         session.beginTransaction();
         Query query = session.getNamedQuery(queryName);
         query.setString(paramName, paramValue);
-        return (IModel)query.uniqueResult();
+        return (T)query.uniqueResult();
 
     }
 
+
     @Transactional
-    public List getList(String namedQuery, Map<String, String> params){
+    public List<T> getList(String namedQuery, Map<String, String> params){
 
         Session session = null;
-        List list = new ArrayList();
+        List<T> list = new ArrayList();
         try {
             session = getCurrentSession();
             session.beginTransaction();
@@ -58,7 +59,7 @@ public class BaseDao<T extends IModel> implements IBaseDao {
                 query.setString(key, value);
             });
 
-            list = query.list();
+            list = (List<T>) query.list();
         }catch (Exception e){
             //TODO logging
             e.printStackTrace();

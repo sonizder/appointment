@@ -12,3 +12,7 @@
 .footerBackgroundColor{
     background-color: #DEE5ED;
 }
+
+.table tbody>tr>td.vert-align{
+    vertical-align: middle;
+}
