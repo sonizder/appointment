@@ -9,7 +9,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "APPOINTMENTS")
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "GET_APPOINTMENTS", query = "SELECT a.* FROM APPOINTMENTS a")
+        @NamedNativeQuery(name = "GET_APPOINTMENTS", query = "SELECT a.* FROM APPOINTMENTS a"),
+                @NamedNativeQuery(name = "SEARCH_APPOINTMENTS", query = "SELECT a.* FROM APPOINTMENTS a WHERE a.CITY = :city, a.TOWN = :town, a.DISTRICT = :district, a.SECTOR = :sector")
 })
 public class Appointment implements Serializable, IModel{
 

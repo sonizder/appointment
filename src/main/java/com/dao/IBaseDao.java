@@ -14,9 +14,11 @@ public interface IBaseDao<T extends IModel> {
 
     void save(T model);
 
-    List<T> getAll(Class<T> clazz);
-
     T getUniqueValue(String queryName, String paramName, String paramValue);
 
+    List<T> getAll(Class<T> clazz);
+
     List<T> getList(String namedQuery, Map<String, String> params);
+
+    List<T> getList(Class<T> clazz, Map<String, String> params);
 }

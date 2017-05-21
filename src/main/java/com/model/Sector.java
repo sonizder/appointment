@@ -26,6 +26,12 @@ public class Sector implements Serializable, IModel {
     @Column(name = "NAME")
     private String name;
 
+    @Column(name = "IMAGE")
+    private String image;
+
+    @Column(name = "ALT")
+    private String alt;
+
     public Long getId() {
         return id;
     }
@@ -48,5 +54,21 @@ public class Sector implements Serializable, IModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getAlt() {
+        return alt;
+    }
+
+    public void setAlt(String alt) {
+        this.alt = alt;
     }
 }

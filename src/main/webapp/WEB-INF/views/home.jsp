@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -12,10 +12,19 @@
     <link rel="stylesheet" href='<c:url value="/static/css/bootstrap.min.css" />' />
     <link rel="stylesheet" href='<c:url value="/static/css/select2-bootstrap.css" />' />
     <link rel="stylesheet" href='<c:url value="/static/css/custom.css" />' />
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jq-2.2.4/dt-1.10.15/af-2.2.0/b-1.3.1/datatables.min.css"/>
+
     <script language="JavaScript" type="text/javascript" src="<c:url value="/static/js/jquery-3.2.1.js" />"></script>
     <script language="JavaScript" type="text/javascript" src="<c:url value="/static/js/bootstrap.min.js" />"></script>
     <script language="JavaScript" type="text/javascript" src="<c:url value="/static/js/address.js" />"></script>
     <script language="JavaScript" type="text/javascript" src="<c:url value="/static/js/custom.js" />"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jq-2.2.4/dt-1.10.15/af-2.2.0/b-1.3.1/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#searchResultTable').dataTable();
+        });
+    </script>
 </head>
 
 <html>
@@ -56,38 +65,18 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-1"></div>
-        <div class="col-lg-2">
-            <div class="container">
-                <h3>Sağlık</h3>
-                <a href="#" class="scrollToSearch">
-                    <img src="<c:url value='/static/images/health.png'/>" class="img-thumbnail" alt="Cinque Terre" width="180" height="180"/>
-                </a>
+
+        <c:forEach var="sector" items="${sectorList}">
+            <div class="col-lg-2">
+                <div class="container">
+                    <h3>${sector.name}</h3>
+                    <a href="#" class="scrollToSearch">
+                        <img src="<c:url value="${sector.image}"/>" class="img-thumbnail" alt="${sector.alt}" width="180" height="180"/>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="container">
-                <h3>Eğitim</h3>
-                <img src="<c:url value='/static/images/education.png'/>" class="img-thumbnail" alt="Cinque Terre" width="180" height="180"/>
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="container">
-                <h3>Müzik</h3>
-                <img src="<c:url value='/static/images/instrument.png'/>" class="img-thumbnail" alt="Cinque Terre" width="180" height="180"/>
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="container">
-                <h3>Kuaför</h3>
-                <img src="<c:url value='/static/images/barber.jpg'/>" class="img-thumbnail" alt="Cinque Terre" width="180" height="180"/>
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="container">
-                <h3>Spor</h3>
-                <img src="<c:url value='/static/images/sports.png'/>" class="img-thumbnail" alt="Cinque Terre" width="180" height="180"/>
-            </div>
-        </div>
+        </c:forEach>
+
         <div class="col-lg-1"></div>
     </div>
 
@@ -96,13 +85,13 @@
     <div id="searchPanel" class="container">
         <div class="row">
             <div class="panel-body">
-                <form:form action="/appointment/user/login" commandName="cities" method="post">
+                <form:form action="/appointment/home" commandName="searchModel" method="post">
                     <div class="col-lg-1"></div>
                     <div class="col-lg-2">
                         <div class="input-group">
                             <div class="form-group">
 
-                                <input id="city" list="cityList" class="form-control" placeholder="Şehir" onchange="getTown()" />
+                                <form:input path="city" id="city" list="cityList" class="form-control" placeholder="Şehir" onchange="getTown()" />
                                 <datalist id="cityList">
                                     <c:forEach var="city" items="${cityList}">
                                         <option value="${city}"/>
@@ -117,7 +106,7 @@
                         <div class="input-group">
                             <div class="form-group">
 
-                                <input id="town" list="townList" class="form-control" placeholder="İlçe" onchange="getDistrict()" />
+                                <form:input path="town" id="town" list="townList" class="form-control" placeholder="İlçe" onchange="getDistrict()" />
                                 <datalist id="townList">
                                     <c:forEach var="town" items="${townList}">
                                         <option value="${town}"/>
@@ -131,7 +120,7 @@
                         <div class="input-group">
                             <div class="form-group">
 
-                                <input id="district" list="districtList" class="form-control" placeholder="Semt Yada Mahalle" />
+                                <form:input path="district" id="district" list="districtList" class="form-control" placeholder="Semt Yada Mahalle" />
                                 <datalist id="districtList">
                                     <c:forEach var="district" items="${districtList}">
                                         <option value="${district}"/>
@@ -141,16 +130,18 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="col-lg-4">
                         <div class="input-group">
-                            <input id="sector" list="sectorList" class="form-control" placeholder="Mağaza Ara" />
+                            <form:input path="sector" id="sector" list="sectorList" class="form-control" placeholder="Mağaza Ara" />
                             <datalist id="sectorList">
                                 <c:forEach var="sector" items="${sectorList}">
                                     <option value="${sector.name}"/>
                                 </c:forEach>
                             </datalist>
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">Ara</button>
+                                <button class="btn btn-default" type="submit">Ara</button>
                             </span>
                         </div>
                     </div>
@@ -166,13 +157,13 @@
             <div class="col-lg-10">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <table class="table table-striped table-hover">
+                        <table id="searchResultTable" class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>Row</th>
-                                <th>First Name</th>
-                                <th>Sektör</th>
-                                <th>Adres</th>
+                                <th>Resim</th>
+                                <th>Magaza İsmi</th>
+                                <th>Sektörü</th>
+                                <th>Adresi</th>
                             </tr>
                             </thead>
                             <tbody>

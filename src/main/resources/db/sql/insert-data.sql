@@ -26,11 +26,11 @@ INSERT INTO ADDRESSES VALUES (22, 0, 'Rize', 'Çayeli', 'Yenipazar');
 INSERT INTO ADDRESSES VALUES (23, 0, 'Rize', 'Ardeşen', 'Merkez');
 INSERT INTO ADDRESSES VALUES (24, 0, 'Rize', 'Ardeşen', 'Fırtına Mahallesi');
 
-INSERT INTO SECTORS VALUES (1, 0, 'Sağlık');
-INSERT INTO SECTORS VALUES (2, 0, 'Eğitim');
-INSERT INTO SECTORS VALUES (3, 0, 'Müzik');
-INSERT INTO SECTORS VALUES (4, 0, 'Kuaför');
-INSERT INTO SECTORS VALUES (5, 0, 'Spor');
+INSERT INTO SECTORS VALUES (1, 0, 'Sağlık', '/static/images/health.png', 'Sağlık');
+INSERT INTO SECTORS VALUES (2, 0, 'Eğitim', '/static/images/education.png', 'Eğitim');
+INSERT INTO SECTORS VALUES (3, 0, 'Müzik', '/static/images/instrument.png', 'Müzik');
+INSERT INTO SECTORS VALUES (4, 0, 'Kuaför', '/static/images/barber.jpg', 'Kuaför');
+INSERT INTO SECTORS VALUES (5, 0, 'Spor', '/static/images/sports.png', 'Spor');
 
 
 INSERT INTO APPOINTMENTS VALUES (1, 0, 'Altın Makas', 'Kuaför', 'Istanbul', 'Bağcılar', 'Yıldıztepe', 'AKTİF', 'static/images/appointment/barber/barber1.jpeg');

@@ -2,6 +2,7 @@ package com.dao;
 
 import com.model.IModel;
 import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,8 +73,22 @@ public class BaseDao<T extends IModel> implements IBaseDao<T> {
         return list;
     }
 
+    public List<T> getList(Class<T> clazz, Map<String, String> params){
+        Criteria criteria = getCriteria(clazz);
+        params.forEach((key, value) -> {
+            criteria.add(Restrictions.eq(key, value));
+        });
+        return (List<T>)criteria.list();
+    }
+
 
     private Session getCurrentSession(){
         return sessionFactory.getCurrentSession();
+    }
+
+    private Criteria getCriteria(Class<T> clazz){
+        Session session = getCurrentSession();
+        session.beginTransaction();
+        return session.createCriteria(clazz);
     }
 }
