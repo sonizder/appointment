@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
  * Created by soner.ustel on 19/03/2017.
  */
 @Controller
-@RequestMapping("/home")
+//@RequestMapping("/home")
 public class HomeController {
 
     @Autowired
@@ -52,17 +53,23 @@ public class HomeController {
 //        return sectorService.getSectorList();
 //    }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView home(@ModelAttribute("searchModel") SearchModel searchModel){
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public ModelAndView home(@ModelAttribute("searchModel") SearchModel searchModel, HttpServletRequest request){
 
         ModelAndView mav = new ModelAndView("home");
         mav.addObject("isLogin", authenticationHelper.isUserLogin());
+
         mav.addObject("cityList", addressService.getCity());
+
+        List<String> townList = addressService.getTown(searchModel.getCity());
+        mav.addObject("townList", townList);
+
+        List<String> districtList = addressService.getDistrict(searchModel.getCity(), searchModel.getCity());
+        mav.addObject("districtList", districtList);
 
         List<Sector> sectorList = sectorService.getSectorList();
         mav.addObject("sectorList", sectorList);
 
-//        List<Appointment> appointmentList = appointmentService.getAppointmentList();
         List<Appointment> appointmentList = appointmentService.searchAppointment(searchModel);
         mav.addObject("appointmentList", appointmentList);
 
@@ -71,8 +78,8 @@ public class HomeController {
         return mav;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView searchAppointment(@ModelAttribute("searchModel") SearchModel searchModel, RedirectAttributes redirectAttributes){
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ModelAndView searchAppointment(@ModelAttribute("searchModel") SearchModel searchModel, RedirectAttributes redirectAttributes, HttpServletRequest request){
         redirectAttributes.addFlashAttribute("searchModel", searchModel);
         return new ModelAndView("redirect:home");
     }

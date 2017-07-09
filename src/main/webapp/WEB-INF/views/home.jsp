@@ -82,55 +82,38 @@
 
     <p/>
 
+
     <div id="searchPanel" class="container">
         <div class="row">
             <div class="panel-body">
-                <form:form action="/appointment/home" commandName="searchModel" method="post">
+
+                <form:form action="/appointment/search" commandName="searchModel" method="get">
                     <div class="col-lg-1"></div>
                     <div class="col-lg-2">
-                        <div class="input-group">
-                            <div class="form-group">
-
-                                <form:input path="city" id="city" list="cityList" class="form-control" placeholder="Şehir" onchange="getTown()" />
-                                <datalist id="cityList">
-                                    <c:forEach var="city" items="${cityList}">
-                                        <option value="${city}"/>
-                                    </c:forEach>
-                                </datalist>
-
-                            </div>
-                        </div>
+                        <form:input path="city" id="city" list="cityList" class="form-control" placeholder="Şehir" onchange="getTown()" />
+                        <datalist id="cityList">
+                            <c:forEach var="city" items="${cityList}">
+                                <option value="${city}"/>
+                            </c:forEach>
+                        </datalist>
                     </div>
 
                     <div class="col-lg-2">
-                        <div class="input-group">
-                            <div class="form-group">
-
-                                <form:input path="town" id="town" list="townList" class="form-control" placeholder="İlçe" onchange="getDistrict()" />
-                                <datalist id="townList">
-                                    <c:forEach var="town" items="${townList}">
-                                        <option value="${town}"/>
-                                    </c:forEach>
-                                </datalist>
-
-                            </div>
-                        </div>
+                        <form:input path="town" id="town" list="townList" class="form-control" placeholder="İlçe" onchange="getDistrict()" />
+                        <datalist id="townList">
+                            <c:forEach var="town" items="${townList}">
+                                <option value="${town}"/>
+                            </c:forEach>
+                        </datalist>
                     </div>
                     <div class="col-lg-2">
-                        <div class="input-group">
-                            <div class="form-group">
-
-                                <form:input path="district" id="district" list="districtList" class="form-control" placeholder="Semt Yada Mahalle" />
-                                <datalist id="districtList">
-                                    <c:forEach var="district" items="${districtList}">
-                                        <option value="${district}"/>
-                                    </c:forEach>
-                                </datalist>
-
-                            </div>
-                        </div>
+                        <form:input path="district" id="district" list="districtList" class="form-control" placeholder="Semt Yada Mahalle" />
+                        <datalist id="districtList">
+                            <c:forEach var="district" items="${districtList}">
+                                <option value="${district}"/>
+                            </c:forEach>
+                        </datalist>
                     </div>
-
 
                     <div class="col-lg-4">
                         <div class="input-group">
@@ -142,7 +125,7 @@
                             </datalist>
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit">Ara</button>
-                            </span>
+                        </span>
                         </div>
                     </div>
                     <div class="col-lg-1"></div>
@@ -150,6 +133,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="container">
         <div class="row">
